@@ -1,0 +1,105 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
+
+<!DOCTYPE html>
+<head runat="server">
+    <title></title>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<html>
+<body>
+    <form runat="server">
+    <div class="page">
+        <div class="header">
+            <div class="title">
+                <h1>
+                    Rent and spend
+                </h1>
+            </div>
+            <div class="loginDisplay">
+                <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                    <AnonymousTemplate>
+                        [ <a href="~/Account/Login.aspx" ID="HeadLoginStatus" runat="server">Log In</a> ]
+                    </AnonymousTemplate>
+                    <LoggedInTemplate>
+                        Welcome <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
+                        [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/"/> ]
+                    </LoggedInTemplate>
+                </asp:LoginView>
+            </div>
+            <div class="clear hideSkiplink">
+                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+                    <Items>
+                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
+                        <asp:MenuItem NavigateUrl="~/Guest/ProductList.aspx" Text="Product list"/>
+                        <asp:MenuItem NavigateUrl="~/User/RentItem.aspx" Text="Rent item"/>
+                        <asp:MenuItem NavigateUrl="~/User/ReturnItem.aspx" Text="Return item"/>
+                        <asp:MenuItem NavigateUrl="~/Admin/AddNewProduct.aspx" Text="Add new product"/>
+                        <asp:MenuItem NavigateUrl="~/Guest/AboutUs.aspx" Text="About us"/>
+                        <asp:MenuItem NavigateUrl="~/Guest/ContactUs.aspx" Text="Contact us"/>
+                    </Items>
+                </asp:Menu>
+            </div>
+        </div>
+         <div class="container">
+
+   <div class="leftsidenavigation"><h2>Product categories</h2><br />
+   <asp:ContentPlaceHolder ID="LeftSideNavigation" runat="server">
+       <br />
+       <asp:HyperLink ID="HyperLink1" runat="server">Electrical</asp:HyperLink>
+       <br />
+       <br />
+       <asp:HyperLink ID="HyperLink2" runat="server">Lawn and garden</asp:HyperLink>
+                <br />
+       <br />
+       <asp:HyperLink ID="HyperLink3" runat="server">Cleaning</asp:HyperLink>
+       <br />
+       <br />
+       <asp:HyperLink ID="HyperLink4" runat="server">Generators</asp:HyperLink>
+       <br />
+       <br />
+       <asp:HyperLink ID="HyperLink5" runat="server">Plumbing</asp:HyperLink>
+                </asp:ContentPlaceHolder>
+                </div>
+
+    
+   <div class="rightsidenavigation"><h2>Contact information</h2><br />
+   <asp:ContentPlaceHolder ID="RightSideNavigation" runat="server">
+       <br />
+       Anita Jonker<br />
+       Email:<br />
+       <br />
+       Chase Agulhas<br />
+       Email:<br />
+       <br />
+       Chad February<br />
+       Email:<br />
+       </asp:ContentPlaceHolder>
+                </div>
+
+   <div class="maincontent">
+   <asp:ContentPlaceHolder ID="MainContent" runat="server">
+
+       <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+           ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
+           SelectCommand="SELECT * FROM [provinces]" 
+           ConflictDetection="CompareAllValues" 
+           DeleteCommand="DELETE FROM [provinces] WHERE [provincename] = @original_provincename" 
+           InsertCommand="INSERT INTO [provinces] ([provincename]) VALUES (@provincename)" 
+           OldValuesParameterFormatString="original_{0}">
+           <DeleteParameters>
+               <asp:Parameter Name="original_provincename" Type="String" />
+           </DeleteParameters>
+           <InsertParameters>
+               <asp:Parameter Name="provincename" Type="String" />
+           </InsertParameters>
+       </asp:SqlDataSource>
+
+       </asp:ContentPlaceHolder>
+   </div>
+
+</div>
+    </form>
+</body>
+</html>
