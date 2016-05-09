@@ -11,4 +11,16 @@ public partial class SiteMaster : System.Web.UI.MasterPage
     {
 
     }
+    protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void SqlDataSource1_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
+    {
+
+    }
+    protected void SqlDataSource2_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
+    {
+
+    }
 }

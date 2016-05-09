@@ -11,6 +11,8 @@ public partial class User_RentItem : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        Calendar1.Visible = false;
+        Calendar2.Visible = false;
         Label1.Text = generateRentalNumber();
     }
 
@@ -45,31 +47,48 @@ public partial class User_RentItem : System.Web.UI.Page
         String rentDate = Calendar1.SelectedDate.ToShortDateString();
         String returnDate = Calendar2.SelectedDate.ToShortDateString();
 
-        SqlConnection connection = new SqlConnection(@"Data Source=.\SQLEXPRESS;AttachDbFilename=E:\CPUT\IRP300S\June projects\RentAndSpend\App_Data\ASPNETDB.MDF;Integrated Security=True;User Instance=True");
+        SqlConnection connection = new SqlConnection(@"Data Source=.\SQLEXPRESS;AttachDbFilename=G:\CPUT\IRP300S\June projects\RentAndSpend\App_Data\ASPNETDB.MDF;Integrated Security=True;User Instance=True");
         SqlCommand insertRentalDetails = new SqlCommand("INSERT into RentingDetails(RentalNumber, RequestDate, ReturnDate, CustomerID) VALUES(@RentalNumber, @RequestDate, @ReturnDate, @CustomerID)");
         SqlCommand insertReturnDetails = new SqlCommand("INSERT into ReturnDetails(ReturnNumber, RentalNumber, DueDate, DateReturned, ProductID) VALUES (@ReturnNumber, @RentalNumber, @DueDate, @DateReturned, @ProductID)");
 
         insertRentalDetails.CommandType = CommandType.Text;
         insertRentalDetails.Connection = connection;
 
-        insertReturnDetails.CommandType = CommandType.Text;
-        insertReturnDetails.Connection = connection;
-
         insertRentalDetails.Parameters.AddWithValue("@RentalNumber", rentalNumber);
         insertRentalDetails.Parameters.AddWithValue("@RequestDate", rentDate);
         insertRentalDetails.Parameters.AddWithValue("@ReturnDate", returnDate);
         insertRentalDetails.Parameters.AddWithValue("@CustomerID", name);
 
+        insertReturnDetails.CommandType = CommandType.Text;
+        insertReturnDetails.Connection = connection;
+
         String returnNumber = generateReturnNumber();
         insertReturnDetails.Parameters.AddWithValue("@ReturnNumber", returnNumber);
         insertReturnDetails.Parameters.AddWithValue("@RentalNumber", rentalNumber);
         insertReturnDetails.Parameters.AddWithValue("@DueDate", returnDate);
-        insertReturnDetails.Parameters.AddWithValue("@DateReturned", false);
+        insertReturnDetails.Parameters.AddWithValue("@DateReturned", null);
         insertReturnDetails.Parameters.AddWithValue("@ProductID", 1234);
 
         connection.Open();
         insertRentalDetails.ExecuteNonQuery();
         insertReturnDetails.ExecuteNonQuery();
         connection.Close();
+    }
+    
+    protected void ImageButton1_Click1(object sender, ImageClickEventArgs e)
+    {
+        Calendar1.Visible = true;
+    }
+    protected void Calendar1_SelectionChanged(object sender, EventArgs e)
+    {
+        Calendar1.Visible = false;
+    }
+    protected void ImageButton2_Click(object sender, ImageClickEventArgs e)
+    {
+        Calendar2.Visible = true;
+    }
+    protected void Calendar2_SelectionChanged(object sender, EventArgs e)
+    {
+        Calendar2.Visible = false;
     }
 }

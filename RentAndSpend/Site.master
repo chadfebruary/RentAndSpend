@@ -1,13 +1,14 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
 
 <!DOCTYPE html>
+<html>
 <head runat="server">
     <title></title>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<html>
+
 <body>
     <form runat="server">
     <div class="page">
@@ -46,20 +47,31 @@
 
    <div class="leftsidenavigation"><h2>Product categories</h2><br />
    <asp:ContentPlaceHolder ID="LeftSideNavigation" runat="server">
+       <asp:ScriptManager ID="ScriptManager1" runat="server">
+       </asp:ScriptManager>
+       <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+           <ContentTemplate>
+               <asp:HyperLink ID="HyperLink1" runat="server" 
+                   NavigateUrl="~/Guest/Electrical.aspx">Electrical</asp:HyperLink>
+               <br />
+               <br />
+               <asp:HyperLink ID="HyperLink2" runat="server" 
+                   NavigateUrl="~/Guest/LawnAndGarden.aspx">Lawn and Garden</asp:HyperLink>
+               <br />
+               <br />
+               <asp:HyperLink ID="HyperLink3" runat="server" 
+                   NavigateUrl="~/Guest/Cleaning.aspx">Cleaning</asp:HyperLink>
+               <br />
+               <br />
+               <asp:HyperLink ID="HyperLink4" runat="server" 
+                   NavigateUrl="~/Guest/Generator.aspx">Generator</asp:HyperLink>
+               <br />
+               <br />
+               <asp:HyperLink ID="HyperLink5" runat="server" 
+                   NavigateUrl="~/Guest/Plumbing.aspx">Plumbing</asp:HyperLink>
+           </ContentTemplate>
+       </asp:UpdatePanel>
        <br />
-       <asp:HyperLink ID="HyperLink1" runat="server">Electrical</asp:HyperLink>
-       <br />
-       <br />
-       <asp:HyperLink ID="HyperLink2" runat="server">Lawn and garden</asp:HyperLink>
-                <br />
-       <br />
-       <asp:HyperLink ID="HyperLink3" runat="server">Cleaning</asp:HyperLink>
-       <br />
-       <br />
-       <asp:HyperLink ID="HyperLink4" runat="server">Generators</asp:HyperLink>
-       <br />
-       <br />
-       <asp:HyperLink ID="HyperLink5" runat="server">Plumbing</asp:HyperLink>
                 </asp:ContentPlaceHolder>
                 </div>
 
@@ -68,13 +80,13 @@
    <asp:ContentPlaceHolder ID="RightSideNavigation" runat="server">
        <br />
        Anita Jonker<br />
-       Email:<br />
+       Email: @gmail.com<br />
        <br />
        Chase Agulhas<br />
-       Email:<br />
+       Email: @gmail.com<br />
        <br />
        Chad February<br />
-       Email:<br />
+       Email: @gmail.com<br />
        </asp:ContentPlaceHolder>
                 </div>
 
@@ -83,16 +95,17 @@
 
        <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
            ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-           SelectCommand="SELECT * FROM [provinces]" 
+           SelectCommand="SELECT [categoryname] FROM [category]" 
            ConflictDetection="CompareAllValues" 
-           DeleteCommand="DELETE FROM [provinces] WHERE [provincename] = @original_provincename" 
-           InsertCommand="INSERT INTO [provinces] ([provincename]) VALUES (@provincename)" 
-           OldValuesParameterFormatString="original_{0}">
+           DeleteCommand="DELETE FROM [category] WHERE [categoryname] = @original_categoryname" 
+           InsertCommand="INSERT INTO [category] ([categoryname]) VALUES (@categoryname)" 
+           OldValuesParameterFormatString="original_{0}" 
+           onselecting="SqlDataSource1_Selecting">
            <DeleteParameters>
-               <asp:Parameter Name="original_provincename" Type="String" />
+               <asp:Parameter Name="original_categoryname" Type="String" />
            </DeleteParameters>
            <InsertParameters>
-               <asp:Parameter Name="provincename" Type="String" />
+               <asp:Parameter Name="categoryname" Type="String" />
            </InsertParameters>
        </asp:SqlDataSource>
 

@@ -8,7 +8,7 @@ body
     font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
     margin: 0px;
     padding: 0px;
-    color: Blue;
+    color: black;
 }
 
 a:link, a:visited
@@ -147,9 +147,9 @@ first child of the left and right table columns */
     height: 21px;
 }
 
-.leftsidenavigation{ float: left; width: 20%; height: 800px; background-color:white;text-align: center;}
-.rightsidenavigation{ float: right; width: 20%;height: 800px; background-color:white;text-align: center;}
-.maincontent{display: inline-block; width: 55%;height: 800px; background-color:White;text-align: center;}
+.leftsidenavigation{float: left;  width: 20%; height: 800px; background-color:white;text-align: center;}
+.rightsidenavigation{float: right;  width: 20%;height: 800px; background-color:white;text-align: center;}
+.maincontent{display: inline-block; width: 59%;height: 800px; background-color:White;text-align: center;}
 
 
 /* TAB MENU   

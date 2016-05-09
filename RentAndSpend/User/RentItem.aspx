@@ -13,6 +13,7 @@
         .style3
         {
             width: 186px;
+            margin-left: 40px;
         }
         .style4
         {
@@ -106,7 +107,11 @@
             <td class="style2">
                 Rent date:</td>
             <td class="style3">
-                <asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>
+                <asp:ImageButton ID="ImageButton1" runat="server" Height="30px" 
+                    ImageUrl="~/Images/images.png" onclick="ImageButton1_Click1" Width="50px" />
+                <asp:Calendar ID="Calendar1" runat="server" 
+                    style="z-index: 1; left: 511px; top: 284px; position: absolute; height: 160px; width: 200px">
+                </asp:Calendar>
             </td>
         </tr>
         <tr>
@@ -114,7 +119,12 @@
                 Return date:
             </td>
             <td class="style3">
-                <asp:Calendar ID="Calendar2" runat="server"></asp:Calendar>
+                <asp:ImageButton ID="ImageButton2" runat="server" Height="30px" 
+                    ImageUrl="~/Images/images.png" onclick="ImageButton2_Click" Width="50px" />
+                <asp:Calendar ID="Calendar2" runat="server" 
+                    onselectionchanged="Calendar2_SelectionChanged" 
+                    style="z-index: 1; left: 511px; top: 283px; position: absolute; height: 160px; width: 200px">
+                </asp:Calendar>
             </td>
         </tr>
         <tr>
